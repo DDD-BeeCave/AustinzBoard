@@ -1,26 +1,26 @@
 # skateboard.py
 # DIY Electric Skateboard
 # Created by Matthew Timmons-Brown, The Raspberry Pi Guy
-# Simon Beal assisted with the development of this program - if I die, it is his fault.
+# Modifications made by Austin and Derek Dicker
 
-import pigpio
-import time
-import cwiid
-import sys
-import threading
-import subprocess
+import pigpio  		# controls GPIOs
+import time		# manages delays, measure elapse time, and handle timing ops
+import cwiid		# manages Wii remote (e.g., reads inputs)
+import sys		# provides access to some variables used by the interpreter 
+import threading	# allows for the creation of multiple threads within a program
+import subprocess	# allows for spawning of new processes - enables Python script execution
 
 pi = pigpio.pi()
 is_debug = "debug" in sys.argv
 
 # Global constants
 motor = 18
-led = 17
-button = 27
+led = 17		# controls the LED in the power-button
+button = 27		# receives on-off from power-button
 lights_on = 26
 lights_off = 16
 
-wiimote_bluetooth = "00:1F:C5:86:3E:85"
+wiimote_bluetooth = "B8:AE:6E:31:1B:83"  # Changed for Dicker's Wii (BLACK)
 powerdown = ["sudo", "shutdown", "now"]
 
 stop_val = False
@@ -53,6 +53,13 @@ class Skateboard(object):
 		return self.__speed
 
 	# Decorator to push speed value to ESC as soon as when changed
+	# This code is designed to adjust the motor speed in a smooth, gradual manner. 
+	# It prevents sudden changes in speed by incrementally adjusting the current speed 
+	# toward the target value. This gradual change can be important in applications 
+	# where sudden changes could be dangerous or undesirable, such as in motor control 
+	# for an electric skateboard. The use of sleep intervals ensures that the adjustments
+	# happen over time, leading to a smooth acceleration or deceleration.
+	
 	@speed.setter
 	def speed(self, value):
 		value = max(min(value, Skateboard.min_speed), Skateboard.max_speed)
@@ -73,6 +80,7 @@ class Skateboard(object):
 			pi.write(led,0)
 			time.sleep(period)
 
+	# We are not yet including the Arduino code for LEDs
 	# Toggles an Arduino that toggles the neopixels on the bottom of the electric skateboard
 	def arduino_trigger(self):
 		if Skateboard.indicator_lights_on == 0:
