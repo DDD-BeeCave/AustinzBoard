@@ -166,19 +166,19 @@ class wiimote_watcher(threading.Thread):
 
 	def motor_off(self):
 		global stop_val
-        	stop_val = True # Causes main thread loop to stop working and speed to default
+		stop_val = True # Causes main thread loop to stop working and speed to default
 
 	def shutdown(self):
 		self.motor_off()
-        	if is_debug:
-			print "OFF"
+		if is_debug:
+			print("OFF")
 		else:
 			subprocess.call(powerdown)
 
 	def wiimote_check(self):
 		try:
 			output = self.try_comms()
-			print output
+			print(output)
 			if (("100% loss") in output) or (output == ""): # If 100% packets lost: wiimote died. If output is null: bluetooth dongle died
 				self.shutdown()
 		except:
