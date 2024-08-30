@@ -1,0 +1,19 @@
+git clone https://github.com/azzra/pyton3-weemote/
+
+sudo apt-get install libcwiid1
+
+sudo apt-get install cwiid
+
+sudo apt-get install automake
+
+sudo apt-get install libtool
+
+sudo apt-get install flex
+
+sudo apt-get install bison
+
+sudo apt-get install bluetooth
+
+sudo apt-get install libbluetooth-dev
+
+# after moving to the phython directory, use "sudo make install" and it should build
