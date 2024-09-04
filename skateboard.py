@@ -13,12 +13,12 @@ import subprocess	# allows for spawning of new processes - enables Python script
 pi = pigpio.pi()
 is_debug = "debug" in sys.argv
 
-# Global constants
-motor = 18
-led = 17		# controls the LED in the power-button
-button = 27		# receives on-off from power-button
-lights_on = 26
-lights_off = 16
+# GPIO Mapping to Headers on the Raspberry Pi Zero W 40-pin header
+motor = 18		# Note that GPIO_18 maps to pin 12 on the 40-pin header	/ PWM0 Output controls the motors
+led = 17		# Note that GPIO_17 maps to pin 11 on the 40-pin header	/ GPIO Output controls the Power Button LED	
+button = 27		# Note that GPIO_27 maps to pin 13 on the 40-pin header / GPIO Input controls the Power Button On/Off
+lights_on = 26		# Note that GPIO_26 maps to pin 37 on the 40-pin header / Not Implemented in our Design Yet
+lights_off = 16		# Note that GPIO_16 maps to pin 36 on the 40-pin header / Not Implemented in our Design Yet
 
 wiimote_bluetooth = "B8:AE:6E:31:1B:83"  # Changed for Dicker's Wii (BLACK)
 powerdown = ["sudo", "shutdown", "now"]
@@ -42,24 +42,23 @@ class Skateboard(object):
 		pi.set_PWM_frequency(motor, 50)
 		pi.set_mode(led, pigpio.OUTPUT)
 		pi.set_mode(button, pigpio.INPUT)
-		pi.set_mode(lights_on, pigpio.OUTPUT)
-		pi.set_mode(lights_off, pigpio.OUTPUT)
+		pi.set_mode(lights_on, pigpio.OUTPUT)		# Not Implemented in our Design Yet
+		pi.set_mode(lights_off, pigpio.OUTPUT)		# Not Implemented in our Design Yet
 		pi.set_pull_up_down(button, pigpio.PUD_UP)
 		self.__speed = 1500
 		self.speed = 1500
 
+	# Decorator to push speed value to ESC as soon as when changed
 	@property
 	def speed(self):
 		return self.__speed
-
-	# Decorator to push speed value to ESC as soon as when changed
+	
 	# This code is designed to adjust the motor speed in a smooth, gradual manner. 
 	# It prevents sudden changes in speed by incrementally adjusting the current speed 
 	# toward the target value. This gradual change can be important in applications 
 	# where sudden changes could be dangerous or undesirable, such as in motor control 
 	# for an electric skateboard. The use of sleep intervals ensures that the adjustments
 	# happen over time, leading to a smooth acceleration or deceleration.
-	
 	@speed.setter
 	def speed(self, value):
 		value = max(min(value, Skateboard.min_speed), Skateboard.max_speed)
