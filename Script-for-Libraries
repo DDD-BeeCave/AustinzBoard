@@ -16,4 +16,4 @@ sudo apt-get install bluetooth
 
 sudo apt-get install libbluetooth-dev
 
-# after moving to the phython directory, use "sudo make install" and it should build
+# after moving to the python directory, use "sudo make install" and it should build
