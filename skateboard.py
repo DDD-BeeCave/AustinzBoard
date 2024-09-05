@@ -190,7 +190,7 @@ def main():
 	# Class instance and program run
 	skate = Skateboard()
 	pi.write(led,1)		# DDD Note:  Remove later
-	skate.blinky(120,1)     # DDD Note:  skate.blinky(20,0.05)
+	skate.blinky(12000,100)     # DDD Note:  skate.blinky(20,0.05)
 #	skate.connection_process()
 	# Wiimote checker thread
 #	checker = wiimote_watcher()
