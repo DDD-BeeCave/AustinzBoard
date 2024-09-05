@@ -188,7 +188,7 @@ class wiimote_watcher(threading.Thread):
 def main():
 	# Class instance and program run
 	skate = Skateboard()
-	skate.blinky(20,0.05)
+	skate.blinky(120,1)   # Code was:  skate.blinky(20,0.05)
 #	skate.connection_process()
 	# Wiimote checker thread
 #	checker = wiimote_watcher()
