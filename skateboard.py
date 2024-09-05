@@ -205,5 +205,5 @@ def main():
 #		else:
 #			subprocess.call(powerdown)
 
-#if __name__ == "__main__":
+# if __name__ == "__main__":
 	main()
