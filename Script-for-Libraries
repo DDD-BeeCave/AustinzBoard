@@ -16,4 +16,6 @@ sudo apt-get install bluetooth
 
 sudo apt-get install libbluetooth-dev
 
+sudo apt-get install pigpiod
+
 # after moving to the python directory, use "sudo make install" and it should build
