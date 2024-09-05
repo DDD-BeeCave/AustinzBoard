@@ -189,21 +189,21 @@ def main():
 	# Class instance and program run
 	skate = Skateboard()
 	skate.blinky(20,0.05)
-	skate.connection_process()
+#	skate.connection_process()
 	# Wiimote checker thread
-	checker = wiimote_watcher()
-	checker.daemon = True
-	checker.start()
-	try:
-		skate.run_process()
-	except KeyboardInterrupt:
-		raise
-	except:
-		skate.speed = 1500
-		if is_debug:
-			raise
-		else:
-			subprocess.call(powerdown)
+#	checker = wiimote_watcher()
+#	checker.daemon = True
+#	checker.start()
+#	try:
+#		skate.run_process()
+#	except KeyboardInterrupt:
+#		raise
+#	except:
+#		skate.speed = 1500
+#		if is_debug:
+#			raise
+#		else:
+#			subprocess.call(powerdown)
 
 if __name__ == "__main__":
 	main()
