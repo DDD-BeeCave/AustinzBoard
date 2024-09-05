@@ -76,8 +76,8 @@ class Skateboard(object):
 		for i in range (1,times):
 			pi.write(led,1)
 			time.sleep(period)
-			pi.write(led,0)
-			time.sleep(period)
+			# pi.write(led,0)	DDD Note:  Commented out to root cause LED turning on
+			# time.sleep(period)   DDD Note:  Commented out to root cause LED turning on
 
 	# We are not yet including the Arduino code for LEDs
 	# Toggles an Arduino that toggles the neopixels on the bottom of the electric skateboard
